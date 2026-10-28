@@ -7,6 +7,7 @@
 - Count the ring's `numPoints` field in `triangle_wkb_size`. Previously the size was 4 bytes smaller than the bytes written (#102).
 - Reject geometry type codes 8 and above, such as a Triangle (17), when reading. Previously the type was read as `code & 0x7`, so these codes parsed as another type: a Triangle as a Point (#104).
 - Store the point count of `reader::LineString`, `reader::LinearRing` and `reader::MultiPoint` as a `u32`, shrinking each by 8 bytes on 64-bit platforms.
+- Store the parsed children of `MultiLineString`, `MultiPolygon` and `GeometryCollection` in a boxed slice instead of a `Vec`, shrinking each of these structs from 48 to 40 bytes (#107).
 
 ## 0.9.3 - 2026-10-14
 
